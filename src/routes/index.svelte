@@ -1,10 +1,17 @@
 <script>
-	import {goto} from '$app/navigation';
+	import { goto } from '$app/navigation';
 	import Counter from '$lib/Counter.svelte';
 	import Page1 from '../lib/Page1.svelte';
 	import Page2 from '../lib/Page2.svelte';
-	import Profile from './profile/index.svelte'
+	import Profile from './profile/index1.svelte';
+	// import { deepPurple } from 'svelte-materialify/src/utils/colors';
+	// import colors from 'svelte-materialify/src/utils/colors';
+	// let red = colors.red.base;
+	// let lightRed = colors.red['lighten-1'];
+
 	
+	// let purple = deepPurple.base;
+
 	const options = [
 		{ name: 'Page 1', component: Page1 },
 		{ name: 'Page 2', component: Page2 },
@@ -14,20 +21,34 @@
 
 	let page = [];
 	function openPage(index) {
-		page = index >0?options[index]:[];
-		
+		page = index > 0 ? options[index] : [];
 	}
 </script>
 
 <main>
-	<h1>Hello world!</h1>
+	<h1>controle home office!</h1>
 
-	<button on:click="{()=>{openPage(1)}}">Open Page</button>
-	<button on:click="{()=>{openPage(2)}}">Contador</button>
-	<button on:click="{()=>{goto('./profile/')}}">Painel de Controle</button>
-	<button on:click="{()=>{openPage(-1)}}">Limpar</button>
+	<button
+		on:click={() => {
+			openPage(1);
+		}}>Open Page</button
+	>
+	<button
+		on:click={() => {
+			openPage(2);
+		}}>Contador</button
+	>
+	<button
+		on:click={() => {
+			goto('./profile/');
+		}}>Painel de Controle</button
+	>
+	<button
+		on:click={() => {
+			openPage(-1);
+		}}>Limpar</button
+	>
 
-	<p>Visit <a href="https://svelte.dev">svelte.dev</a> to learn how to build Svelte apps.</p>
 	<svelte:component this={page.component} />
 </main>
 
@@ -39,7 +60,7 @@
 	}
 
 	h1 {
-		color: #ff3e00;
+		color: #041149;
 		text-transform: uppercase;
 		font-size: 4rem;
 		font-weight: 100;
