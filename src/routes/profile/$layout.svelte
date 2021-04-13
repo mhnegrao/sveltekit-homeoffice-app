@@ -6,7 +6,7 @@
 	<title>Painel de Controle</title>
 	<style>
 		body {
-			background-color: rgb(70, 70, 119);
+		
 		}
 	</style>
 </svelte:head>

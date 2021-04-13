@@ -1,100 +1,151 @@
-<section>
-	<aside>
-		<nav>
-			<div class="nav-header">
-				<figure>
-					<img src="http://placehold.it/140x100" alt="" />
-				</figure>
-			</div>
-			<ul>
-				<li>Item 1</li>
-				<li>Item 2</li>
-				<li>Item 3</li>
-				<li>Item 4</li>
-				<li>Item 5</li>
-				<li>Item 6</li>
-			</ul>
-		</nav>
+<script>
+	import { goto } from '$app/navigation';
+	import Tarefas from '$lib/Tarefas.svelte';
+	import Financas from '$lib/Financas.svelte';
+	import AsideBar from '$lib/AsideBar.svelte';
+	import Servicos from '$lib/Servicos.svelte';
+
+	import {
+		NavigationDrawer,
+		Row,
+		Col,
+		Container,
+		List,
+		ListItem,
+		Button,
+		Icon,
+		MaterialApp
+	} from 'svelte-materialify';
+	import { mdiViewDashboard, mdiAccountBox, mdiGavel } from '@mdi/js';
+
+	const options = [
+		{ name: 'Root', component: '.' },
+		{ name: 'Tarefas', component: Tarefas },
+		{ name: 'Serviços', component: Servicos },
+		{ name: 'Financas', component: Financas }
+	];
+	let page = [];
+
+	function openPage(index) {
+		page = index > 0 ? options[index] : [];
+	}
+</script>
+
+<section id="main">
+	<header class="mainHeader"><h4>Painel de Controle</h4></header>
+	<!-- <nav class="mainNav">Nav</nav> -->
+	<article class="mainArticle"><svelte:component this={page.component} /></article>
+	<aside class="mainAside">
+		<ul>
+			<li
+				on:click={() => {
+					openPage(1);
+				}}
+			>
+				Tarefas
+			</li>
+		</ul>
+		<ul>
+			<li
+				on:click={() => {
+					openPage(2);
+				}}
+			>
+				Serviços
+			</li>
+		</ul>
+		<ul>
+			<li
+				on:click={() => {
+					openPage(3);
+				}}
+			>
+				Finanças
+			</li>
+		</ul>
+		<ul>
+			<li id="logout"
+				
+				on:click={() => {
+					goto('/');
+				}}>Sair</li
+			>
+		</ul>
 	</aside>
-	<header><h3>Header Centered</h3></header>
-	<div id="render-child">
-		<p>
-			loren Lorem ipsum dolor sit, amet consectetur adipisicing elit. Necessitatibus quaerat
-			quisquam animi, recusandae amet error, adipisci assumenda pariatur dolor, exercitationem magni
-			doloribus placeat incidunt est inventore vero voluptatem qui ullam?
-		</p>
-	</div>
+	<footer class="mainFooter">Footer</footer>
 </section>
 
 <style>
-	aside {
-		background: rgb(2, 0, 36);
-		background: linear-gradient(
-			90deg,
-			rgba(2, 0, 36, 1) 1%,
-			rgba(16, 16, 130, 1) 99%,
-			rgba(11, 15, 240, 1) 100%,
-			rgb(38, 0, 255) 100%,
-			rgba(22, 126, 147, 1) 100%
-		);
-		height: 100%;
-        color:gold;
-		left: 0;
-        font-weight: bold;
-		position: fixed;
-		top: 0;
-		width: 250px;
-	}
-	ul {
-		list-style: none;
-        padding:15px
-	}
-li{
-    margin: 2px;
-    height: 40px;
-    transition: width 2s;
-}
-li:hover{
-    color:cyan;
-    background-color: navy;
-    cursor: pointer;
-    width: 200px;
-    text-align: center;
-}
-	header {
-		background: #ff0;
-		height: 60px;
-		left: 250px;
-		right: 0;
-		position: fixed;
-		text-align: center;
-
-		top: 0;
-		z-index: 99;
-	}
-	figure {
+	* {
 		margin: 0;
+		padding: 0;
 	}
-	img {
-		height: 60px;
-		width: 100%;
+	li {
+		padding-top: 5px;
+		padding-bottom: 5px;
+		padding-left: 15px;
+
 	}
-	#render-child {
-		background: #4699b4;
-		height: 100%;
-		margin-top: 58px;
-		left: 250px;
-		right: 0px;
-		padding: 10px;
-		position: fixed;
+	li:hover {
+		cursor: pointer;
+		background-color: indigo;
 	}
-	.container {
-		left: 0;
-		right: 0;
-		margin-left: 250px;
-		min-height: 100%;
-		padding-left: 0px;
-		height: 100%;
-		position: relative;
+	button {
+		padding-top: 30px;
+		display: block;
+	}
+	/**utilizando css grid layout*/
+	#main {
+		display: grid;
+		grid-template-areas: 'header header' 'aside content' 'footer footer';
+		grid-template-rows: 15vh 80vh 5vh;
+		grid-template-columns: 15%;
+	}
+	#logout{
+		margin-top: 30px;
+		padding-top:5px;
+		padding-bottom: 5px;
+		background-color: tomato;
+	}
+	.mainHeader {
+		grid-area: header;
+		background: rgb(29, 29, 53);
+		color: white;
+		padding-top: 5px;
+	}
+	.mainNav {
+		grid-area: nav;
+		background: rgb(5, 5, 22);
+		color: white;
+	}
+	.mainAside {
+		padding-top:20px;
+		grid-area: aside;
+		background: rgb(22, 22, 26);
+		color: white;
+		padding-left: 10px;
+	}
+	.mainArticle {
+		grid-area: content;
+		margin-top:5px;
+	}
+	.mainFooter {
+		grid-area: footer;
+		background: rgb(2, 2, 10);
+		color: white;
+	}
+
+	/**breakpoints*/
+	@media screen and (max-width: 768px) {
+		body {
+			background: #cdcdcd;
+		}
+		#main {
+			grid-template-areas: 'header' 'content' 'aside' 'footer';
+		}
+		.mainNav {
+			grid-area: header;
+			margin-top: 30px;
+		}
 	}
 </style>
