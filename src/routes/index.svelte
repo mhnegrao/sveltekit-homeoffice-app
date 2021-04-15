@@ -3,20 +3,12 @@
 	import Counter from '$lib/Counter.svelte';
 	import Page1 from '../lib/Page1.svelte';
 	import Page2 from '../lib/Page2.svelte';
-	import Profile from './profile/index1.svelte';
-	// import { deepPurple } from 'svelte-materialify/src/utils/colors';
-	// import colors from 'svelte-materialify/src/utils/colors';
-	// let red = colors.red.base;
-	// let lightRed = colors.red['lighten-1'];
-
 	
-	// let purple = deepPurple.base;
-
 	const options = [
 		{ name: 'Page 1', component: Page1 },
 		{ name: 'Page 2', component: Page2 },
-		{ name: 'Contador', component: Counter },
-		{ name: 'Profile', component: Profile }
+		{ name: 'Contador', component: Counter }
+		
 	];
 
 	let page = [];
